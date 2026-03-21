@@ -111,7 +111,7 @@ The repo exposes the studio system through normal markdown entrypoints:
 
 1. **Clone or use as template**:
    ```bash
-   git clone https://github.com/Donchitos/Claude-Code-Game-Studios.git my-game
+   git clone https://github.com/daveashworth/Codex-Game-Studios.git my-game
    cd my-game
    ```
 
@@ -232,8 +232,8 @@ Tested on **Windows 10** with Git Bash. Repo scripts and workflows use POSIX-com
 
 ## Community
 
-- **Discussions** — [GitHub Discussions](https://github.com/Donchitos/Claude-Code-Game-Studios/discussions) for questions, ideas, and showcasing what you've built
-- **Issues** — [Bug reports and feature requests](https://github.com/Donchitos/Claude-Code-Game-Studios/issues)
+- **Discussions** — [GitHub Discussions](https://github.com/daveashworth/Codex-Game-Studios/discussions) for questions, ideas, and showcasing what you've built
+- **Issues** — [Bug reports and feature requests](https://github.com/daveashworth/Codex-Game-Studios/issues)
 
 ---
 
