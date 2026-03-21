@@ -1,6 +1,6 @@
 # Collaborative Session Examples
 
-This directory contains realistic, end-to-end session transcripts showing how the Game Studio Agent Architecture works in practice. Each example demonstrates the **collaborative workflow** where agents ask questions, present options, and wait for user approval rather than autonomously generating content.
+This directory contains realistic, end-to-end session transcripts showing how the Game Studio role architecture works in practice. Each example demonstrates the **collaborative workflow** where roles ask questions, present options, and wait for user approval rather than autonomously generating content.
 
 ---
 
@@ -8,23 +8,23 @@ This directory contains realistic, end-to-end session transcripts showing how th
 
 ### [Session: Designing the Crafting System](session-design-crafting-system.md)
 **Type:** Design
-**Agent:** game-designer
+**Role:** game-designer
 **Duration:** ~45 minutes (12 turns)
 **Complexity:** Medium
 
 **Scenario:**
-Solo dev needs to design a crafting system that serves Pillar 2 ("Emergent Discovery Through Experimentation"). The agent guides them through question/answer, presents 3 design options with game theory analysis, incorporates user modifications, and iteratively drafts the GDD with approval at each step.
+Solo dev needs to design a crafting system that serves Pillar 2 ("Emergent Discovery Through Experimentation"). The role guides them through question/answer, presents 3 design options with game theory analysis, incorporates user modifications, and iteratively drafts the GDD with approval at each step.
 
 **Key Collaborative Moments:**
-- Agent asks 5 clarifying questions upfront
+- Role asks 5 clarifying questions upfront
 - Presents 3 distinct options with pros/cons + MDA alignment
-- User modifies recommended option, agent incorporates immediately
+- User modifies recommended option, role incorporates immediately
 - Edge case flagged proactively ("what if non-recipe combo?")
 - Each GDD section shown for approval before moving to next
 - Explicit "May I write to [file]?" before creating file
 
 **Learn:**
-- How design agents ask about goals, constraints, references
+- How design roles ask about goals, constraints, references
 - How to present options using game design theory (MDA, SDT, Bartle)
 - How to iterate on drafts section-by-section
 - When to delegate to specialists (systems-designer, economy-designer)
@@ -33,23 +33,23 @@ Solo dev needs to design a crafting system that serves Pillar 2 ("Emergent Disco
 
 ### [Session: Implementing Combat Damage Calculation](session-implement-combat-damage.md)
 **Type:** Implementation
-**Agent:** gameplay-programmer
+**Role:** gameplay-programmer
 **Duration:** ~30 minutes (10 turns)
 **Complexity:** Low-Medium
 
 **Scenario:**
-User has a complete design doc and wants the damage calculation implemented. Agent reads the spec, identifies 7 ambiguities/gaps, asks clarifying questions, proposes architecture for approval, implements with rule enforcement, and proactively writes tests.
+User has a complete design doc and wants the damage calculation implemented. The role reads the spec, identifies 7 ambiguities/gaps, asks clarifying questions, proposes architecture for approval, implements with rule enforcement, and proactively writes tests.
 
 **Key Collaborative Moments:**
-- Agent reads design doc first, identifies 7 spec ambiguities
+- Role reads design doc first, identifies 7 spec ambiguities
 - Architecture proposed with code samples BEFORE implementation
-- User requests type safety, agent refines and re-proposes
-- Rules catch issues (hardcoded values), agent fixes transparently
+- User requests type safety, role refines and re-proposes
+- Rules catch issues (hardcoded values), role fixes transparently
 - Tests written proactively following verification-driven development
 - Agent offers options for next steps rather than assuming
 
 **Learn:**
-- How implementation agents clarify specs before coding
+- How implementation roles clarify specs before coding
 - How to propose architecture with code samples for approval
 - How rules enforce standards automatically
 - How to handle spec gaps (ask, don't assume)
@@ -59,12 +59,12 @@ User has a complete design doc and wants the damage calculation implemented. Age
 
 ### [Session: Scope Crisis - Strategic Decision Making](session-scope-crisis-decision.md)
 **Type:** Strategic Decision
-**Agent:** creative-director
+**Role:** creative-director
 **Duration:** ~25 minutes (8 turns)
 **Complexity:** High
 
 **Scenario:**
-Solo dev faces crisis: Alpha milestone in 2 weeks, crafting system needs 3 weeks, investor demo is make-or-break. Creative director gathers context, frames the decision, presents 3 strategic options with honest trade-off analysis, makes recommendation but defers to user, then documents decision with ADR and demo script.
+Solo dev faces crisis: Alpha milestone in 2 weeks, crafting system needs 3 weeks, investor demo is make-or-break. The creative director gathers context, frames the decision, presents 3 strategic options with honest trade-off analysis, makes recommendation but defers to the user, then documents the decision with an ADR and demo script.
 
 **Key Collaborative Moments:**
 - Agent reads context docs before proposing solutions
@@ -75,7 +75,7 @@ Solo dev faces crisis: Alpha milestone in 2 weeks, crafting system needs 3 weeks
 - Documents decision + provides demo script to support user
 
 **Learn:**
-- How leadership agents frame strategic decisions
+- How leadership roles frame strategic decisions
 - How to present options with trade-off analysis
 - How to use game dev precedent and theory in recommendations
 - How to document decisions (ADRs)
@@ -100,9 +100,9 @@ Question → Options → Decision → Draft → Approval
 ### ✅ **Collaborative Behaviors Shown:**
 
 1. **Agents Ask Before Assuming**
-   - Design agents ask about goals, constraints, references
-   - Implementation agents clarify spec ambiguities
-   - Leadership agents gather full context before recommending
+   - Design roles ask about goals, constraints, references
+   - Implementation roles clarify spec ambiguities
+   - Leadership roles gather full context before recommending
 
 2. **Agents Present Options, Not Dictates**
    - 2-4 options with pros/cons
@@ -129,10 +129,10 @@ Question → Options → Decision → Draft → Approval
 ## 📖 **How to Use These Examples**
 
 ### For New Users:
-Read these examples BEFORE your first session. They show realistic expectations for how agents work:
-- Agents are consultants, not autonomous executors
+Read these examples BEFORE your first session. They show realistic expectations for how roles work:
+- Roles are consultants, not autonomous executors
 - You make all creative/strategic decisions
-- Agents provide expert guidance and options
+- Roles provide expert guidance and options
 
 ### For Understanding Specific Workflows:
 - **Designing a system?** → Read session-design-crafting-system.md
@@ -179,14 +179,14 @@ If you're teaching someone to use this system, walk through one example turn-by-
 After reading these examples, try this exercise:
 
 1. Pick one of your game systems (combat, inventory, progression, etc.)
-2. Ask the relevant agent to design or implement it
-3. Notice if the agent:
+2. Ask the relevant role to design or implement it
+3. Notice if the role:
    - ✅ Asks clarifying questions upfront
    - ✅ Presents options with reasoning
    - ✅ Shows drafts before finalizing
    - ✅ Requests approval before writing files
 
-If the agent skips any of these, remind it:
+If the role skips any of these, remind it:
 > "Please follow the collaborative protocol from docs/COLLABORATIVE-DESIGN-PRINCIPLE.md"
 
 ---
@@ -195,5 +195,5 @@ If the agent skips any of these, remind it:
 
 - **Full Principle Documentation:** [docs/COLLABORATIVE-DESIGN-PRINCIPLE.md](../COLLABORATIVE-DESIGN-PRINCIPLE.md)
 - **Workflow Guide:** [docs/WORKFLOW-GUIDE.md](../WORKFLOW-GUIDE.md)
-- **Agent Roster:** [.claude/docs/agent-roster.md](../../.claude/docs/agent-roster.md)
-- **CLAUDE.md (Collaboration Protocol):** [CLAUDE.md](../../CLAUDE.md#collaboration-protocol)
+- **Role Roster:** [studio/docs/agent-roster.md](../../studio/docs/agent-roster.md)
+- **Agent Entry Point:** [AGENTS.md](../../AGENTS.md)

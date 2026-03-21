@@ -6,15 +6,15 @@
 
 ## 🎯 Core Philosophy
 
-This agent architecture is designed for **USER-DRIVEN COLLABORATION**, not autonomous AI generation.
+This role architecture is designed for **USER-DRIVEN COLLABORATION**, not autonomous AI generation.
 
 ### ✅ The Right Model: Collaborative Consultant
 
 ```
-Agent = Expert Consultant
+Role = Expert Consultant
 User = Creative Director (Final Decision Maker)
 
-Agents:
+Roles:
 - Ask clarifying questions
 - Research and present options
 - Explain trade-offs and reasoning
@@ -41,7 +41,7 @@ Users:
 
 ## 🔄 Collaborative Workflow Pattern
 
-Every agent interaction should follow this pattern:
+Every role interaction should follow this pattern:
 
 ### Pattern: Question → Options → Decision → Draft → Approval
 
@@ -329,25 +329,21 @@ Skill: "Writing design/concept.md..."
 
 ---
 
-## 🎛️ Structured Decision UI (AskUserQuestion)
+## 🎛️ Structured Decision Capture
 
-Use the `AskUserQuestion` tool to present decisions as a **selectable UI** instead
-of plain markdown text. This gives the user a clean interface to pick from options
-(or type "Other" for a custom answer).
+Present decisions with a clear, selectable structure instead of burying them in unstructured prose. Use whatever choice UI the current environment supports, or fall back to a short numbered list with an explicit custom option.
 
 ### The Explain → Capture Pattern
 
-Detailed reasoning doesn't fit in the tool's short descriptions. So use a two-step
-pattern:
+Detailed reasoning often does not fit in short choice labels. Use a two-step pattern:
 
 1. **Explain first** — Write your full expert analysis in conversation text:
    detailed pros/cons, theory references, example games, pillar alignment. This is
    where the reasoning lives.
 
-2. **Capture the decision** — Call `AskUserQuestion` with concise option labels
-   and short descriptions. The user picks from the UI or types a custom answer.
+2. **Capture the decision** — Present concise option labels and short descriptions. The user chooses one or provides a custom answer.
 
-### When to Use AskUserQuestion
+### When to Use Structured Decision Capture
 
 ✅ **Use it for:**
 - Every decision point where you'd present 2-4 options
@@ -360,22 +356,22 @@ pattern:
 ❌ **Don't use it for:**
 - Open-ended discovery questions ("What excites you about roguelikes?")
 - Single yes/no confirmations ("May I write to file?")
-- When running as a Task subagent (tool may not be available)
+- When delegated work is returning notes instead of interacting directly with the user
 
 ### Format Guidelines
 
 - **Labels**: 1-5 words (e.g., "Hybrid Discovery", "Full Randomized")
 - **Descriptions**: 1 sentence summarizing the approach and key trade-off
 - **Recommended**: Add "(Recommended)" to your preferred option's label
-- **Previews**: Use `markdown` field for comparing code structures or formulas
-- **Multi-select**: Use `multiSelect: true` when choices aren't mutually exclusive
+- **Previews**: When the environment supports it, include a structured preview for formulas or code shapes
+- **Multi-select**: When appropriate, allow multiple compatible choices
 
 ### Example — Multi-Question Batch (Clarifying Questions)
 
 After introducing the topic in conversation, batch constrained questions:
 
 ```
-AskUserQuestion:
+Decision capture:
   questions:
     - question: "Should crafting recipes be discovered or learned?"
       header: "Discovery"
@@ -402,7 +398,7 @@ AskUserQuestion:
 After writing the full pros/cons analysis in conversation text:
 
 ```
-AskUserQuestion:
+Decision capture:
   questions:
     - question: "Which crafting approach fits your vision?"
       header: "Approach"
@@ -420,7 +416,7 @@ AskUserQuestion:
 After presenting the full strategic analysis with pillar alignment:
 
 ```
-AskUserQuestion:
+Decision capture:
   questions:
     - question: "How should we handle crafting scope for Alpha?"
       header: "Scope"
@@ -433,15 +429,15 @@ AskUserQuestion:
           description: "Drop crafting, focus on combat — deadline met, pillar missing"
 ```
 
-### Team Skill Orchestration
+### Team Workflow Orchestration
 
-In team skills, subagents return their analysis as text. The **orchestrator**
-(main session) calls `AskUserQuestion` at each decision point between phases:
+In team workflows, specialist contributors return their analysis as text. The
+main coordinator uses a concise choice format at each decision point between phases:
 
 ```
 [game-designer returns 3 combat approaches with analysis]
 
-Orchestrator uses AskUserQuestion:
+Coordinator presents:
   question: "Which combat approach should we develop?"
   options: [concise summaries of the 3 approaches]
 
@@ -457,7 +453,7 @@ Orchestrator uses AskUserQuestion:
 Every file write must follow:
 
 ```
-1. Agent: "I've completed the [design/code/doc]. Here's a summary:
+1. Role: "I've completed the [design/code/doc]. Here's a summary:
            [Key points]
 
            May I write this to [filepath]?"
@@ -465,7 +461,7 @@ Every file write must follow:
 2. User: "Yes" or "No, change X first" or "Show me the full draft"
 
 3. IF User says "Yes":
-   Agent: [Uses Write/Edit tool]
+   Role: [Writes the file]
           "Written to [filepath]. Next steps?"
 
    IF User says "No":
@@ -556,14 +552,14 @@ Agents should be:
 
 ---
 
-## 🎯 Applying This to Team Skills
+## 🎯 Applying This to Team Workflows
 
-Team skills (like `/team-combat`) orchestrate multiple agents, but still collaborative:
+Team workflows (like `team-combat`) orchestrate multiple roles, but still collaborative:
 
 ```
-User: "/team-combat 'grappling hook ability'"
+User: "team-combat 'grappling hook ability'"
 
-Skill (Coordinator):
+Workflow (Coordinator):
 "I'll coordinate the combat team to design and implement the grappling hook.
  Before we start, a few questions:
 
@@ -586,7 +582,7 @@ Skill (Coordinator):
  [User approves or requests changes]
 
  **Phase 3: Parallel Implementation**
- I'll now coordinate 4 agents to implement in parallel:
+ I'll now coordinate 4 roles to implement in parallel:
  - gameplay-programmer: Core grapple physics
  - technical-artist: Cable VFX
  - sound-designer: Whoosh + impact SFX
@@ -596,9 +592,9 @@ Skill (Coordinator):
 
 User: "Yes"
 
-[Each agent shows their work, gets approval, then writes]
+[Each role shows their work, gets approval, then writes]
 
-Skill (Coordinator):
+Workflow (Coordinator):
 "All 4 subsystems implemented. Would you like me to:
  A) Have gameplay-programmer integrate them now
  B) Let you test each independently first
@@ -611,7 +607,7 @@ The orchestration is automated, but **decision points stay with the user**.
 
 ## ✅ Quick Validation: Is Your Session Collaborative?
 
-After any agent interaction, check:
+After any role interaction, check:
 
 - [ ] Did the agent ask clarifying questions?
 - [ ] Did the agent present multiple options with trade-offs?
@@ -680,9 +676,9 @@ WHEN implementing:
 
 This principle has been fully embedded across the project:
 
-- **CLAUDE.md** — Collaboration protocol section added
-- **All 48 agent definitions** — Updated to enforce question-asking and approval
-- **All skills** — Updated to require approval before writing
+- **AGENTS.md** — Collaboration protocol section added
+- **All 48 role definitions** — Updated to enforce question-asking and approval
+- **All workflows** — Updated to require approval before writing
 - **WORKFLOW-GUIDE.md** — Rewritten with collaborative examples
 - **README.md** — Clarifies collaborative (not autonomous) design
-- **AskUserQuestion tool** — Integrated into 10 skills for structured option UI
+- **Structured questioning** — Integrated into core workflows for option-based UI when available

@@ -1,19 +1,19 @@
 <p align="center">
-  <h1 align="center">Claude Code Game Studios</h1>
+  <h1 align="center">Codex Game Studios</h1>
   <p align="center">
-    Turn a single Claude Code session into a full game development studio.
+    Turn a single coding-agent session into a full game development studio.
     <br />
-    48 agents. 37 workflows. One coordinated AI team.
+    Structured roles, reusable workflows, and a repo that works with Codex first.
   </p>
 </p>
 
 <p align="center">
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a>
-  <a href=".claude/agents"><img src="https://img.shields.io/badge/agents-48-blueviolet" alt="48 Agents"></a>
-  <a href=".claude/skills"><img src="https://img.shields.io/badge/skills-37-green" alt="37 Skills"></a>
-  <a href=".claude/hooks"><img src="https://img.shields.io/badge/hooks-8-orange" alt="8 Hooks"></a>
-  <a href=".claude/rules"><img src="https://img.shields.io/badge/rules-11-red" alt="11 Rules"></a>
-  <a href="https://docs.anthropic.com/en/docs/claude-code"><img src="https://img.shields.io/badge/built%20for-Claude%20Code-f5f5f5?logo=anthropic" alt="Built for Claude Code"></a>
+  <a href="studio/roles"><img src="https://img.shields.io/badge/roles-48-blueviolet" alt="48 Roles"></a>
+  <a href="studio/workflows"><img src="https://img.shields.io/badge/workflows-37-green" alt="37 Workflows"></a>
+  <a href="studio/templates"><img src="https://img.shields.io/badge/templates-26-orange" alt="26 Templates"></a>
+  <a href="studio/standards"><img src="https://img.shields.io/badge/standards-11-red" alt="11 Standards"></a>
+  <a href="AGENTS.md"><img src="https://img.shields.io/badge/entrypoint-AGENTS.md-111827" alt="AGENTS.md"></a>
   <a href="https://ko-fi.com/donchitos"><img src="https://img.shields.io/badge/Ko--fi-Support%20this%20project-ff5e5b?logo=ko-fi&logoColor=white" alt="Ko-fi"></a>
 </p>
 
@@ -23,7 +23,7 @@
 
 Building a game solo with AI is powerful — but a single chat session has no structure. No one stops you from hardcoding magic numbers, skipping design docs, or writing spaghetti code. There's no QA pass, no design review, no one asking "does this actually fit the game's vision?"
 
-**Claude Code Game Studios** solves this by giving your AI session the structure of a real studio. Instead of one general-purpose assistant, you get 48 specialized agents organized into a studio hierarchy — directors who guard the vision, department leads who own their domains, and specialists who do the hands-on work. Each agent has defined responsibilities, escalation paths, and quality gates.
+**Codex Game Studios** solves this by giving your AI session the structure of a real studio. Instead of one general-purpose assistant, you get a documented studio hierarchy, specialist role definitions, reusable workflows, templates, and standards that keep work legible. The repo is organized around a Codex-native `studio/` library plus root docs that tell agents where to look next.
 
 The result: you still make every decision, but now you have a team that asks the right questions, catches mistakes early, and keeps your project organized from first brainstorm to launch.
 
@@ -33,7 +33,7 @@ The result: you still make every decision, but now you have a team that asks the
 
 - [What's Included](#whats-included)
 - [Studio Hierarchy](#studio-hierarchy)
-- [Slash Commands](#slash-commands)
+- [Codex Workflow Model](#codex-workflow-model)
 - [Getting Started](#getting-started)
 - [Upgrading](#upgrading)
 - [Project Structure](#project-structure)
@@ -50,15 +50,14 @@ The result: you still make every decision, but now you have a team that asks the
 
 | Category | Count | Description |
 |----------|-------|-------------|
-| **Agents** | 48 | Specialized subagents across design, programming, art, audio, narrative, QA, and production |
-| **Skills** | 37 | Slash commands for common workflows (`/start`, `/sprint-plan`, `/code-review`, `/brainstorm`, etc.) |
-| **Hooks** | 8 | Automated validation on commits, pushes, asset changes, session lifecycle, agent audit, and gap detection |
-| **Rules** | 11 | Path-scoped coding standards enforced when editing gameplay, engine, AI, UI, network code, and more |
-| **Templates** | 29 | Document templates for GDDs, ADRs, sprint plans, economy models, faction design, and more |
+| **Roles** | 48 | Specialist role prompts across design, programming, art, audio, narrative, QA, and production |
+| **Workflows** | 37 | Reusable Codex-friendly workflows for ideation, reviews, planning, implementation, and release |
+| **Standards** | 11 | Domain-specific quality standards for gameplay, engine, AI, UI, networking, docs, and tests |
+| **Templates** | 26 | Document templates for GDDs, ADRs, sprint plans, economy models, faction design, and more |
 
 ## Studio Hierarchy
 
-Agents are organized into three tiers, matching how real studios operate:
+Roles are organized into three tiers, matching how real studios operate:
 
 ```
 Tier 1 — Directors (Opus)
@@ -82,7 +81,7 @@ Tier 3 — Specialists (Sonnet/Haiku)
 
 ### Engine Specialists
 
-The template includes agent sets for all three major engines. Use the set that matches your project:
+The template includes role sets for all three major engines. Use the set that matches your project:
 
 | Engine | Lead Agent | Sub-Specialists |
 |--------|-----------|-----------------|
@@ -90,37 +89,23 @@ The template includes agent sets for all three major engines. Use the set that m
 | **Unity** | `unity-specialist` | DOTS/ECS, Shaders/VFX, Addressables, UI Toolkit |
 | **Unreal Engine 5** | `unreal-specialist` | GAS, Blueprints, Replication, UMG/CommonUI |
 
-## Slash Commands
+## Codex Workflow Model
 
-Type `/` in Claude Code to access all 37 skills:
+The repo exposes the studio system through normal markdown entrypoints:
 
-**Reviews & Analysis**
-`/design-review` `/code-review` `/balance-check` `/asset-audit` `/scope-check` `/perf-profile` `/tech-debt`
-
-**Production**
-`/sprint-plan` `/milestone-review` `/estimate` `/retrospective` `/bug-report`
-
-**Project Management**
-`/start` `/project-stage-detect` `/reverse-document` `/gate-check` `/map-systems` `/design-system`
-
-**Release**
-`/release-checklist` `/launch-checklist` `/changelog` `/patch-notes` `/hotfix`
-
-**Creative**
-`/brainstorm` `/playtest-report` `/prototype` `/onboard` `/localize`
-
-**Team Orchestration** (coordinate multiple agents on a single feature)
-`/team-combat` `/team-narrative` `/team-ui` `/team-release` `/team-polish` `/team-audio` `/team-level`
+- Start with `AGENTS.md`
+- Use `ARCHITECTURE.md` to understand the repo layout
+- Follow `docs/CODEX-WORKFLOWS.md` for Codex-specific usage
+- Use `docs/WORKFLOW-GUIDE.md` for the end-to-end game-project process
+- Use `studio/roles/`, `studio/workflows/`, `studio/templates/`, and `studio/standards/` as the operating library
 
 ## Getting Started
 
 ### Prerequisites
 
 - [Git](https://git-scm.com/)
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (`npm install -g @anthropic-ai/claude-code`)
-- **Recommended**: [jq](https://jqlang.github.io/jq/) (for hook validation) and Python 3 (for JSON validation)
-
-All hooks fail gracefully if optional tools are missing — nothing breaks, you just lose validation.
+- A Codex-compatible environment that can read repo docs and edit files
+- **Recommended**: [jq](https://jqlang.github.io/jq/) and Python 3 for some helper scripts
 
 ### Setup
 
@@ -130,18 +115,17 @@ All hooks fail gracefully if optional tools are missing — nothing breaks, you 
    cd my-game
    ```
 
-2. **Open Claude Code** and start a session:
-   ```bash
-   claude
-   ```
+2. **Start with the Codex entrypoint**:
+   - Read `AGENTS.md`
+   - Read `ARCHITECTURE.md`
+   - Read `docs/CODEX-WORKFLOWS.md`
 
-3. **Run `/start`** — the system asks where you are (no idea, vague concept,
-   clear design, existing work) and guides you to the right workflow. No assumptions.
-
-   Or jump directly to a specific skill if you already know what you need:
-   - `/brainstorm` — explore game ideas from scratch
-   - `/setup-engine godot 4.6` — configure your engine if you already know
-   - `/project-stage-detect` — analyze an existing project
+3. **Choose your phase** using `docs/WORKFLOW-GUIDE.md`.
+4. **Use the studio library**:
+   - Pick a role from `studio/roles/`
+   - Follow a workflow in `studio/workflows/`
+   - Create artifacts from `studio/templates/`
+   - Review against `studio/standards/`
 
 ## Upgrading
 
@@ -152,19 +136,17 @@ versions, and which files are safe to overwrite vs. which need a manual merge.
 ## Project Structure
 
 ```
-CLAUDE.md                           # Master configuration
-.claude/
-  settings.json                     # Hooks, permissions, safety rules
-  agents/                           # 48 agent definitions (markdown + YAML frontmatter)
-  skills/                           # 37 slash commands (subdirectory per skill)
-  hooks/                            # 8 hook scripts (bash, cross-platform)
-  rules/                            # 11 path-scoped coding standards
-  docs/
-    quick-start.md                  # Detailed usage guide
-    agent-roster.md                 # Full agent table with domains
-    agent-coordination-map.md       # Delegation and escalation paths
-    setup-requirements.md           # Prerequisites and platform notes
-    templates/                      # 28 document templates
+AGENTS.md                           # Codex entrypoint and project configuration
+ARCHITECTURE.md                     # Repo map and dependency direction
+docs/
+  CODEX-WORKFLOWS.md                # Codex-specific usage
+  WORKFLOW-GUIDE.md                 # End-to-end game project flow
+studio/
+  roles/                            # 48 specialist role definitions
+  workflows/                        # 37 reusable workflow playbooks
+  templates/                        # Reusable design and production templates
+  standards/                        # Quality standards and review lenses
+  docs/                             # Supporting studio references
 src/                                # Game source code
 assets/                             # Art, audio, VFX, shaders, data files
 design/                             # GDDs, narrative docs, level designs
@@ -201,20 +183,12 @@ You stay in control. The agents provide structure and expertise, not autonomy.
 
 ### Automated Safety
 
-**Hooks** run automatically on every session:
+The studio system relies on explicit workflows and review passes rather than a hidden agent runtime:
 
-| Hook | Trigger | What It Does |
-|------|---------|--------------|
-| `validate-commit.sh` | `git commit` | Checks for hardcoded values, TODO format, JSON validity, design doc sections |
-| `validate-push.sh` | `git push` | Warns on pushes to protected branches |
-| `validate-assets.sh` | File writes in `assets/` | Validates naming conventions and JSON structure |
-| `session-start.sh` | Session open | Loads sprint context and recent git activity |
-| `detect-gaps.sh` | Session open | Detects fresh projects (suggests `/start`) and missing documentation when code/prototypes exist |
-| `pre-compact.sh` | Context compression | Preserves session progress notes |
-| `session-stop.sh` | Session close | Logs accomplishments |
-| `log-agent.sh` | Agent spawned | Audit trail of all subagent invocations |
-
-**Permission rules** in `settings.json` auto-allow safe operations (git status, test runs) and block dangerous ones (force push, `rm -rf`, reading `.env` files).
+- Workflows encode the expected sequence of questions, decisions, artifacts, and reviews.
+- Standards provide the review checklist for each domain.
+- Templates keep outputs consistent enough for both humans and agents to navigate.
+- Root docs make the system discoverable without relying on tool-specific hooks.
 
 ### Path-Scoped Rules
 
@@ -245,16 +219,16 @@ This template is grounded in professional game development practices:
 
 This is a **template**, not a locked framework. Everything is meant to be customized:
 
-- **Add/remove agents** — delete agent files you don't need, add new ones for your domains
-- **Edit agent prompts** — tune agent behavior, add project-specific knowledge
-- **Modify skills** — adjust workflows to match your team's process
-- **Add rules** — create new path-scoped rules for your project's directory structure
-- **Tune hooks** — adjust validation strictness, add new checks
-- **Pick your engine** — use the Godot, Unity, or Unreal agent set (or none)
+- **Add/remove roles** — delete role files you don't need, add new ones for your domains
+- **Edit role prompts** — tune role behavior, add project-specific knowledge
+- **Modify workflows** — adjust playbooks to match your team's process
+- **Add standards** — create new path-scoped standards for your project's directory structure
+- **Extend tooling** — add validation or helper scripts that fit your workflow
+- **Pick your engine** — use the Godot, Unity, or Unreal role set (or none)
 
 ## Platform Support
 
-Tested on **Windows 10** with Git Bash. All hooks use POSIX-compatible patterns (`grep -E`, not `grep -P`) and include fallbacks for missing tools. Works on macOS and Linux without modification.
+Tested on **Windows 10** with Git Bash. Repo scripts and workflows use POSIX-compatible patterns (`grep -E`, not `grep -P`) and are intended to work on macOS and Linux as well.
 
 ## Community
 
@@ -263,7 +237,7 @@ Tested on **Windows 10** with Git Bash. All hooks use POSIX-compatible patterns 
 
 ---
 
-*This project is under active development. The agent architecture, skills, and coordination system are solid and usable today — but there's more coming.*
+*This project is under active development. The role architecture, workflows, and coordination system are solid and usable today, but there is more coming.*
 
 ## License
 

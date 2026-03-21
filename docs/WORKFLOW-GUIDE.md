@@ -1,10 +1,14 @@
-# Claude Code Game Studios -- Complete Workflow Guide
+# Codex Game Studios -- Complete Workflow Guide
 
-> **How to go from zero to a shipped game using the Agent Architecture.**
+> **How to go from zero to a shipped game using the repo's role-driven workflow model.**
 >
 > This guide walks you through every phase of game development using the
-> 48-agent system, 37 slash commands, and automated hooks. It assumes you
-> have Claude Code installed and are working from the project root.
+> documented specialist roles, reusable workflows, templates, and standards in
+> the `studio/` library. It assumes you are working from the project root.
+
+> Interpretation rule: when this guide refers to a workflow by name, open the
+> matching directory under `studio/workflows/`. Some examples still use the old
+> slash-style shorthand.
 
 ---
 
@@ -21,8 +25,8 @@
 9. [Phase 8: Localization & Accessibility](#phase-8-localization--accessibility)
 10. [Phase 9: Release & Launch](#phase-9-release--launch)
 11. [Phase 10: Post-Launch & Live Ops](#phase-10-post-launch--live-ops)
-12. [Appendix A: Agent Quick-Reference](#appendix-a-agent-quick-reference)
-13. [Appendix B: Slash Command Quick-Reference](#appendix-b-slash-command-quick-reference)
+12. [Appendix A: Role Quick-Reference](#appendix-a-role-quick-reference)
+13. [Appendix B: Workflow Quick-Reference](#appendix-b-workflow-quick-reference)
 14. [Appendix C: Common Workflows](#appendix-c-common-workflows)
 
 ---
@@ -33,10 +37,10 @@
 
 Before you start, make sure you have:
 
-- **Claude Code** installed and working
+- A Codex-compatible environment that can read and modify repo files
 - **Git** with Git Bash (Windows) or standard terminal (Mac/Linux)
-- **jq** (optional but recommended -- hooks fall back to `grep` if missing)
-- **Python 3** (optional -- some hooks use it for JSON validation)
+- **jq** (optional but recommended)
+- **Python 3** (optional -- useful for validation and helper scripts)
 
 ### Step 0.1: Clone and Configure
 
@@ -47,35 +51,28 @@ git clone <repo-url> my-game
 cd my-game
 ```
 
-### Step 0.2: Run /start (Recommended for New Users)
+### Step 0.2: Choose Your Entry Path
 
-If you're new to the project or don't yet know what game you're building:
+If you're using Codex or another coding agent:
 
-```
-/start
-```
-
-This guided onboarding asks where you are (no idea, vague idea, clear concept,
-existing work) and routes you to the right phase. Skip this if you already have
-a game concept and engine decision.
+1. Read `AGENTS.md`
+2. Read `ARCHITECTURE.md`
+3. Read `docs/CODEX-WORKFLOWS.md`
+4. Open the relevant workflow in `studio/workflows/`
+5. Use the phases in this guide to pick the right next artifact
 
 ### Step 0.3: Choose Your Engine
 
-Run `/setup-engine` in Claude Code. This is the single most important
-configuration step -- it tells every agent what engine, language, and toolchain
-you're using:
+For Codex-first usage, update the engine choice in the shared docs and version
+references using `studio/workflows/setup-engine/`.
 
-```bash
-/setup-engine godot 4.6
-```
+This is the single most important configuration step because it tells every
+workflow what engine, language, and toolchain you're using:
 
-Or run `/setup-engine` with no arguments to get an interactive recommendation
-based on your game's needs (2D/3D, platforms, team size, language preferences).
+**What engine setup should accomplish:**
 
-**What `/setup-engine` does:**
-
-- Pins the engine and version in `CLAUDE.md`
-- Populates `.claude/docs/technical-preferences.md` with naming conventions,
+- Pins the engine and version in the repo's top-level guidance
+- Populates `studio/docs/technical-preferences.md` with naming conventions,
   performance budgets, and engine-specific defaults
 - Detects knowledge gaps (engine version newer than LLM training data) and
   fetches current docs from the web so agents suggest correct APIs
@@ -87,28 +84,9 @@ engine-specialist agents to use. If you pick Godot, agents like
 become your go-to experts. The Unity and Unreal specialists remain available
 but won't be primary.
 
-> **Manual alternative:** You can also edit the Technology Stack section in
-> `CLAUDE.md` directly if you prefer.
-
-### Step 0.3: Verify Hooks Are Working
-
-Start a new Claude Code session. You should see output from the
-`session-start.sh` hook:
-
-```
-=== Claude Code Game Studios -- Session Context ===
-Branch: main
-Recent commits:
-  abc1234 Initial commit
-===================================
-```
-
-If you see this, hooks are working. If not, check `.claude/settings.json` to
-make sure the hook paths are correct for your OS.
-
 ### Step 0.4: Create Your Directory Structure
 
-The directories listed in `CLAUDE.md` don't all exist yet. Create them as
+The directories listed in `AGENTS.md` don't all exist yet. Create them as
 needed -- the system expects this layout:
 
 ```
@@ -157,24 +135,24 @@ production/           # Sprint plans, milestones, releases
 You go from "no idea" or "vague idea" to a structured game concept document.
 This is where you figure out **what** you're making.
 
-> **Tip:** If you ran `/start` in Phase 0 and chose Path A or B, you're already
-> here. `/start` routes you to `/brainstorm` automatically.
+> **Tip:** If you ran the `start` workflow in Phase 0 and chose Path A or B,
+> you're already here. `start` routes you to `brainstorm`.
 
-### Step 1.1: Brainstorm With `/brainstorm`
+### Step 1.1: Brainstorm With `brainstorm`
 
-This is your starting point if you skipped `/start`. Run the brainstorm skill:
-
-```
-/brainstorm
-```
-
-Or with a genre hint:
+This is your starting point if you skipped `start`. Run the brainstorm workflow:
 
 ```
-/brainstorm roguelike deckbuilder
+studio/workflows/brainstorm
 ```
 
-**What happens:** The brainstorm skill guides you through a collaborative 6-phase
+Or with a genre hint in your prompt:
+
+```
+brainstorm: roguelike deckbuilder
+```
+
+**What happens:** The brainstorm workflow guides you through a collaborative 6-phase
 ideation process using professional studio techniques:
 
 Agent: "Let's explore game concepts. What genre or theme interests you? (Optional,
@@ -209,8 +187,8 @@ Agent: [Creates structured concept document with top ideas, target audience,
 Take the brainstorm output and formalize it. Use the **game concept template**:
 
 ```
-Ask Claude to create a game concept document using the template at
-.claude/docs/templates/game-concept.md
+Use the workflow to create a game concept document using the template at
+studio/templates/game-concept.md
 ```
 
 This template includes:
@@ -228,8 +206,8 @@ Before you go further, lock in your **game pillars** -- the 3-5 non-negotiable
 design values that guide every decision. Use the template:
 
 ```
-Ask Claude to create a game pillars document using the template at
-.claude/docs/templates/game-pillars.md
+Use the workflow to create a game pillars document using the template at
+studio/templates/game-pillars.md
 ```
 
 Example pillars:
@@ -289,11 +267,11 @@ For each major system in your game, create a design document in `design/gdd/`.
 Use the template:
 
 ```
-Ask Claude to create a GDD using the template at
-.claude/docs/templates/game-design-document.md
+Use the workflow to create a GDD using the template at
+studio/templates/game-design-document.md
 ```
 
-**The `design-docs` rule** (`.claude/rules/design-docs.md`) requires every GDD
+**The `design-docs` rule** (`studio/standards/design-docs.md`) requires every GDD
 to have these 8 sections:
 
 | # | Section | What Goes Here |
@@ -379,7 +357,7 @@ Before any design doc goes to programmers, run a review:
 /design-review design/gdd/crafting-system.md
 ```
 
-**What happens:** The skill checks the document against the 8-section
+**What happens:** The workflow checks the document against the 8-section
 standard, verifying:
 - Are all sections present and complete?
 - Are formulas unambiguous with defined variables?
@@ -400,7 +378,7 @@ If your game has story, lore, or dialogue, this is when you build it:
 3. **Character sheets** -- Use the `narrative-character-sheet.md` template
    for each major character
 
-The `narrative` rule (`.claude/rules/narrative.md`) enforces:
+The `narrative` rule (`studio/standards/narrative.md`) enforces:
 - Lore consistency across documents
 - Canon levels (Core Canon vs Flavor vs Apocrypha)
 - Character voice profiles
@@ -414,7 +392,7 @@ Before coding starts, make key technical decisions:
 /architecture-decision "State Machine vs Behavior Tree for NPC AI"
 ```
 
-**What happens:** The skill guides you through creating an Architecture Decision Record:
+**What happens:** The workflow guides you through creating an Architecture Decision Record:
 
 Agent: "I'll help document this architectural decision. First, let me understand
        the context. What's driving this decision right now?"
@@ -474,8 +452,8 @@ Agent: [Creates comprehensive ADR]
 Define your project milestones using the template:
 
 ```
-Ask Claude to create a milestone definition using the template at
-.claude/docs/templates/milestone-definition.md
+Use the workflow to create a milestone definition using the template at
+studio/templates/milestone-definition.md
 ```
 
 Typical indie milestones:
@@ -511,7 +489,7 @@ Not everything needs a prototype. Prototype when:
 /prototype "grappling hook movement with momentum"
 ```
 
-**What happens:** The skill collaborates with you to set up the prototype:
+**What happens:** The workflow collaborates with you to set up the prototype:
 
 Agent: "Let's prototype the grappling hook movement. First, let me clarify the
        hypothesis we're testing:
@@ -552,7 +530,7 @@ User: "Yes"
 Agent: [Creates directory structure, README with hypothesis/criteria/status,
        delegates to prototyper agent for minimal implementation]
 
-**Key rule:** The `prototype-code` rule (`.claude/rules/prototype-code.md`)
+**Key rule:** The `prototype-code` rule (`studio/standards/prototype-code.md`)
 intentionally relaxes coding standards for prototypes - hardcoded values OK,
 no tests required, but README with hypothesis and findings is mandatory.
 
@@ -601,7 +579,7 @@ until your game is content-complete.
 /sprint-plan new
 ```
 
-**What happens:** The skill delegates to `producer` to collaborate on sprint planning:
+**What happens:** The workflow delegates to `producer` to collaborate on sprint planning:
 
 Agent: "Let's plan your sprint. First, what's your primary goal for this sprint?
        (One sentence that defines success)"
@@ -650,13 +628,13 @@ Agent: [Creates sprint plan with goal, categorized tasks, 20hr capacity estimate
 Each session follows this pattern:
 
 ```
-1. Start a Claude Code session
+1. Start a Codex session
    (session-start hook shows branch, sprint status, recent commits)
 
 2. Pick a task from the sprint plan
    ("I'm working on the combat damage calculation system")
 
-3. Claude identifies the right agent(s) to help
+3. The active agent identifies the right agent(s) to help
    - game-designer if the design needs work
    - gameplay-programmer for implementation
    - systems-designer for formula details
@@ -805,13 +783,13 @@ Agent: [Writes tests]
 
 ### Step 5.2: Multi-System Feature (Team Orchestration)
 
-For features that span multiple domains, use a team skill:
+For features that span multiple domains, use a team workflow:
 
 ```
 /team-combat "healing ability with HoT (heal-over-time) and cleanse"
 ```
 
-**What happens:** The team skill orchestrates collaborative 6-phase development:
+**What happens:** The team workflow orchestrates collaborative 6-phase development:
 
 **Phase 1 - Design**:
 Agent (game-designer): "I'll design the healing ability. Questions:
@@ -863,7 +841,7 @@ Agent (coordinator): "Feature complete. Status:
        - 1 minor edge case deferred to backlog
        Ready to merge."
 
-Other team skills work similarly:
+Other team workflows work similarly:
 - `/team-narrative` -- Story content from structure to written dialogue
 - `/team-ui` -- UI feature from wireframe to polished implementation
 - `/team-level` -- Level from layout to fully dressed with encounters
@@ -957,7 +935,7 @@ After implementing a feature:
 /code-review src/gameplay/combat/damage_calculator.gd
 ```
 
-**What happens:** The skill performs collaborative architectural review:
+**What happens:** The workflow performs collaborative architectural review:
 
 Agent: "Reviewing src/gameplay/combat/damage_calculator.gd...
 
@@ -1009,7 +987,7 @@ test-driven development with automated enforcement.
 The project enforces **verification-driven development**: write tests before
 or alongside implementation, not after.
 
-The `test-standards` rule (`.claude/rules/test-standards.md`) enforces:
+The `test-standards` rule (`studio/standards/test-standards.md`) enforces:
 - Test naming: `test_[system]_[scenario]_[expected_result]`
 - Structure: Arrange / Act / Assert
 - No external state dependencies
@@ -1084,7 +1062,7 @@ This creates a structured bug report with:
 For milestone validation:
 
 ```
-Ask the qa-lead agent to create a test plan for the Alpha milestone,
+Ask the qa-lead role to create a test plan for the Alpha milestone,
 covering combat, progression, and UI systems.
 ```
 
@@ -1165,7 +1143,7 @@ performance, visual polish, audio, and feel.
 /perf-profile
 ```
 
-**What happens:** The skill guides you through structured performance profiling:
+**What happens:** The workflow guides you through structured performance profiling:
 
 Agent: "Starting performance profiling. First, let's establish your targets:
        - Target FPS?
@@ -1236,13 +1214,13 @@ Agent: [Shows optimized implementation]
 
 ### Step 7.2: Visual Polish
 
-Use the team polish skill for comprehensive polishing:
+Use the team polish workflow for comprehensive polishing:
 
 ```
 /team-polish "combat system"
 ```
 
-**What happens:** The team polish skill coordinates collaborative polish passes:
+**What happens:** The team polish workflow coordinates collaborative polish passes:
 
 Agent (coordinator): "Starting polish pass for combat system. Let me assess
        current state and identify polish priorities...
@@ -1302,7 +1280,7 @@ Agent (coordinator): "Polish pass complete:
 /team-audio "combat audio"
 ```
 
-**What happens:** The team audio skill coordinates the full collaborative audio pipeline:
+**What happens:** The team audio workflow coordinates the full collaborative audio pipeline:
 
 **Phase 1 - Audio Direction** (audio-director):
 Agent: "Let's define the audio direction for combat. What's the emotional goal?
@@ -1506,7 +1484,7 @@ Generates an internal changelog (more technical, for the team).
 /team-release
 ```
 
-**What happens:** The team release skill coordinates all departments for launch:
+**What happens:** The team release workflow coordinates all departments for launch:
 
 **Phase 1 - Pre-Release Validation** (release-manager):
 Agent: "Starting release coordination for v1.0.0. First, status check across
@@ -1611,8 +1589,8 @@ This bypasses normal sprint processes with a full audit trail:
 After launch dust settles:
 
 ```
-Ask Claude to create a post-mortem using the template at
-.claude/docs/templates/post-mortem.md
+Use the workflow to create a post-mortem using the template at
+studio/templates/post-mortem.md
 ```
 
 This covers:
@@ -1650,13 +1628,13 @@ and prepare a "known issues" post.
 
 ---
 
-## Appendix A: Agent Quick-Reference
+## Appendix A: Role Quick-Reference
 
 ### "I need to do X -- which agent do I use?"
 
 | I need to... | Agent | Tier |
 |-------------|-------|------|
-| Come up with a game idea | `/brainstorm` skill | -- |
+| Come up with a game idea | `brainstorm` workflow | -- |
 | Design a game mechanic | `game-designer` | 2 |
 | Design specific formulas/numbers | `systems-designer` | 3 |
 | Design a game level | `level-designer` | 3 |
@@ -1713,7 +1691,7 @@ conflicts go to `producer`.
 
 ---
 
-## Appendix B: Slash Command Quick-Reference
+## Appendix B: Workflow Quick-Reference
 
 ### By Workflow Stage
 
@@ -1765,7 +1743,7 @@ conflicts go to `producer`.
 1. Create/update the GDD for the feature in design/gdd/
 2. /design-review to validate the design
 3. /estimate to understand effort and risk
-4. Use the appropriate /team-* skill:
+4. Use the appropriate team workflow:
    - /team-combat for combat features
    - /team-narrative for story content
    - /team-ui for UI features
@@ -1830,7 +1808,7 @@ conflicts go to `producer`.
    around the assumption that a design document exists before code is written.
    Agents reference GDDs constantly.
 
-2. **Use team skills for cross-cutting features.** Don't try to manually
+2. **Use team workflows for cross-cutting features.** Don't try to manually
    coordinate 4 agents yourself -- let `/team-combat`, `/team-narrative`,
    etc. handle the orchestration.
 

@@ -4,9 +4,9 @@ Brief description of what this PR does.
 
 ## Type of Change
 
-- [ ] New agent
-- [ ] New skill
-- [ ] New hook or rule
+- [ ] New role
+- [ ] New workflow
+- [ ] New standard
 - [ ] Bug fix
 - [ ] Documentation improvement
 - [ ] Other:
@@ -19,9 +19,9 @@ Brief description of what this PR does.
 
 ## Checklist
 
-- [ ] I've tested this in a Claude Code session
-- [ ] New agents include the Collaboration Protocol section
-- [ ] New skills use the subdirectory format (`.claude/skills/<name>/SKILL.md`)
-- [ ] Reference docs are updated (agent-roster, skills-reference, hooks-reference, rules-reference)
-- [ ] Hooks use `grep -E` (POSIX) and fail gracefully without jq/python
+- [ ] I've tested this in the relevant agent workflow
+- [ ] Root docs remain correct (`AGENTS.md`, `ARCHITECTURE.md`, `docs/`)
+- [ ] New roles include the Collaboration Protocol section
+- [ ] New workflows use the subdirectory format (`studio/workflows/<name>/PLAYBOOK.md`)
+- [ ] Reference docs are updated where needed
 - [ ] No hardcoded paths or platform-specific assumptions
