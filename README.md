@@ -14,7 +14,6 @@
   <a href="studio/templates"><img src="https://img.shields.io/badge/templates-26-orange" alt="26 Templates"></a>
   <a href="studio/standards"><img src="https://img.shields.io/badge/standards-11-red" alt="11 Standards"></a>
   <a href="AGENTS.md"><img src="https://img.shields.io/badge/entrypoint-AGENTS.md-111827" alt="AGENTS.md"></a>
-  <a href="https://ko-fi.com/donchitos"><img src="https://img.shields.io/badge/Ko--fi-Support%20this%20project-ff5e5b?logo=ko-fi&logoColor=white" alt="Ko-fi"></a>
 </p>
 
 ---
