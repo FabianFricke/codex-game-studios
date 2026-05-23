@@ -1,9 +1,9 @@
-# Unity 6.3 LTS — Breaking Changes
+# Unity 6000.4.8f1 — Breaking Changes
 
 **Last verified:** 2026-02-13
 
 This document tracks breaking API changes and behavioral differences between Unity 2022 LTS
-(likely in model training) and Unity 6.3 LTS (current version). Organized by risk level.
+(likely in model training) and Unity 6000.4.8f1 (current version). Organized by risk level.
 
 ## HIGH RISK — Will Break Existing Code
 
@@ -136,7 +136,7 @@ UGUI still works but UI Toolkit is recommended for new projects.
 
 ## Migration Checklist
 
-When upgrading from 2022 LTS to Unity 6.3 LTS:
+When upgrading from 2022 LTS to Unity 6000.4.8f1:
 
 - [ ] Audit all DOTS/ECS code (complete rewrite likely needed)
 - [ ] Replace `Input` class with Input System package

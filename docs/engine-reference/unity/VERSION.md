@@ -2,10 +2,12 @@
 
 | Field | Value |
 |-------|-------|
-| **Engine Version** | Unity 6.3 LTS |
-| **Release Date** | December 2025 |
-| **Project Pinned** | 2026-02-13 |
-| **Last Docs Verified** | 2026-02-13 |
+| **Engine Version** | Unity 6000.4.8f1 |
+| **Release Date** | 2026-05-22 |
+| **Project Pinned** | 2026-05-23 |
+| **Last Docs Verified** | 2026-05-23 |
+| **Local Editor Path** | `C:\Program Files\Unity 6000.4.8f1\Editor\Unity.exe` |
+| **Retained Older Editor** | `C:\Program Files\Unity\Hub\Editor\6000.3.9f1\Editor\Unity.exe` |
 | **LLM Knowledge Cutoff** | May 2025 |
 
 ## Knowledge Gap Warning
@@ -23,8 +25,9 @@ before suggesting Unity API calls.
 | 6.1 | Nov 2024 | MEDIUM | Bug fixes, stability improvements |
 | 6.2 | Dec 2024 | MEDIUM | Performance optimizations, new input system improvements |
 | 6.3 LTS | Dec 2025 | HIGH | First LTS since 6.0, production-ready DOTS, enhanced graphics features |
+| 6000.4.8f1 | 2026-05-22 | HIGH | Current local editor; verify APIs against 6000.4 documentation and release notes |
 
-## Major Changes from 2022 LTS to Unity 6.3 LTS
+## Major Changes from 2022 LTS to Unity 6000.4
 
 ### Breaking Changes
 - **Entities/DOTS**: Major API overhaul in Entities 1.0+, complete redesign of ECS patterns
@@ -49,9 +52,9 @@ before suggesting Unity API calls.
 
 ## Verified Sources
 
-- Official docs: https://docs.unity3d.com/6000.0/Documentation/Manual/index.html
+- Official docs: https://docs.unity3d.com/6000.4/Documentation/Manual/
+- Unity 6000.4.8f1 release notes: https://unity.com/releases/editor/whats-new/6000.4.8f1
 - Unity 6 release: https://unity.com/releases/unity-6
-- Unity 6.3 LTS announcement: https://unity.com/blog/unity-6-3-lts-is-now-available
-- Migration guide: https://docs.unity3d.com/6000.0/Documentation/Manual/upgrade-guides.html
+- Migration guide: https://docs.unity3d.com/6000.4/Documentation/Manual/upgrade-guides.html
 - Unity 6 support: https://unity.com/releases/unity-6/support
-- C# API reference: https://docs.unity3d.com/6000.0/Documentation/ScriptReference/index.html
+- C# API reference: https://docs.unity3d.com/6000.4/Documentation/ScriptReference/

@@ -10,6 +10,24 @@ validation and convenience but are not part of the control plane.
 | **Git** | Version control, branch management | [git-scm.com](https://git-scm.com/) |
 | **Codex-compatible environment** | AI runtime that can read repo files and edit them | Use your preferred setup |
 
+## Current Workstation Toolchain
+
+This workstation is already configured for Unity-first development. Agents
+should read `docs/WORKSTATION-TOOLCHAIN.md` for exact executable paths before
+invoking local tools.
+
+| Tool | Current Version |
+| ---- | ---- |
+| Unity Editor | 6000.4.8f1 |
+| Unity Hub | 3.18.0 |
+| Blender | 5.1.2 |
+| VS Code | 1.121.0 |
+| Visual Studio Community 2022 | 17.14.33 |
+| Git | 2.54.0.windows.1 |
+| Python | 3.14.3 |
+| Node.js | 24.15.0 |
+| jq | 1.8.1 |
+
 ## Recommended
 
 | Tool | Used By | Purpose | Install |
@@ -71,5 +89,5 @@ python3 --version      # Should show python version (optional)
 
 ## Recommended IDE
 
-This template works with any editor or terminal workflow that can read repo
-docs, run commands, and edit files.
+Use VS Code as the primary editor for repo work and Visual Studio Community
+2022 for Unity/C# IDE and build tooling when needed.

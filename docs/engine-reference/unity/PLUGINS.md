@@ -1,8 +1,8 @@
-# Unity 6.3 LTS — Optional Packages & Systems
+# Unity 6000.4.8f1 — Optional Packages & Systems
 
 **Last verified:** 2026-02-13
 
-This document indexes **optional packages and systems** available in Unity 6.3 LTS.
+This document indexes **optional packages and systems** available in Unity 6000.4.8f1.
 These are NOT part of the core engine but are commonly used for specific game types.
 
 ---
@@ -44,7 +44,7 @@ These are NOT part of the core engine but are commonly used for specific game ty
 - **Purpose:** Data-Oriented Technology Stack (high-performance ECS for massive scale)
 - **When to use:** Games with 1000s of entities, RTS, simulations
 - **Knowledge Gap:** Entities 1.3+ (Unity 6) is production-ready, major rewrite from 0.x
-- **Status:** Production-Ready (as of Unity 6.3 LTS)
+- **Status:** Production-Ready (as of Unity 6000.4.8f1)
 - **Package:** `com.unity.entities` (Package Manager)
 - **Detailed Docs:** [plugins/dots-entities.md](plugins/dots-entities.md)
 - **Official:** https://docs.unity3d.com/Packages/com.unity.entities@1.3/manual/index.html
@@ -221,11 +221,11 @@ These are NOT part of the core engine but are commonly used for specific game ty
 
 For packages NOT listed above, use the following approach when users ask:
 
-1. **WebSearch** for latest documentation: `"Unity 6.3 [package name]"`
+1. **WebSearch** for latest documentation: `"Unity 6000.4 [package name]"`
 2. Verify if package is:
    - Post-cutoff (beyond May 2025 training data)
    - Preview vs Production-Ready
-   - Still supported in Unity 6.3 LTS
+   - Still supported in Unity 6000.4.8f1
 3. Optionally cache findings in `plugins/[package-name].md` for future reference
 
 ---
@@ -246,5 +246,5 @@ For packages NOT listed above, use the following approach when users ask:
 ---
 
 **Last Updated:** 2026-02-13
-**Engine Version:** Unity 6.3 LTS
+**Engine Version:** Unity 6000.4.8f1
 **LLM Knowledge Cutoff:** May 2025

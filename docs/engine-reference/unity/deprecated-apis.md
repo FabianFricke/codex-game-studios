@@ -1,4 +1,4 @@
-# Unity 6.3 LTS — Deprecated APIs
+# Unity 6000.4.8f1 — Deprecated APIs
 
 **Last verified:** 2026-02-13
 

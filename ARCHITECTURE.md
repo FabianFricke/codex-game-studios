@@ -16,7 +16,8 @@ structure.
   - Codex-native operating library for specialist roles, workflows, templates,
     standards, and studio reference docs.
 - `docs/`
-  - Tool-agnostic operating docs, workflow guides, examples, and engine references.
+  - Tool-agnostic operating docs, workflow guides, examples, engine references,
+    and Corey's local workstation toolchain map.
 - `production/`
   - Project-management artifacts such as sprint plans, milestones, and releases.
 
@@ -38,6 +39,8 @@ structure.
 - `docs/WORKFLOW-GUIDE.md` describes end-to-end project flow.
 - `docs/CODEX-WORKFLOWS.md` translates that flow into Codex-friendly patterns.
 - `docs/COLLABORATIVE-DESIGN-PRINCIPLE.md` defines the human-in-the-loop model.
+- `docs/WORKSTATION-TOOLCHAIN.md` defines the local Unity, Blender, editor, and
+  validation tool paths for this workstation.
 - `docs/examples/` shows concrete session and workflow examples.
 - `docs/engine-reference/` stores engine and version references.
 

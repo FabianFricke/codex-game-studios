@@ -12,11 +12,15 @@ Read files in this order:
 
 1. `AGENTS.md`
 2. `ARCHITECTURE.md`
-3. `docs/WORKFLOW-GUIDE.md`
-4. `docs/COLLABORATIVE-DESIGN-PRINCIPLE.md`
-5. The relevant file under `studio/roles/`, `studio/workflows/`, `studio/templates/`, or `studio/standards/`
+3. `docs/WORKSTATION-TOOLCHAIN.md`
+4. `docs/WORKFLOW-GUIDE.md`
+5. `docs/COLLABORATIVE-DESIGN-PRINCIPLE.md`
+6. The relevant file under `studio/roles/`, `studio/workflows/`, `studio/templates/`, or `studio/standards/`
 
 This keeps the workflow portable across agents and prevents tool-specific drift.
+The workstation toolchain file is the exception: it records Corey's local
+executable paths so agents do not guess when invoking Unity, Blender, editors,
+or validation tools.
 
 ### 2. Treat Specialist Roles As Execution Personas
 
@@ -62,6 +66,7 @@ When a task produces useful context, write it down in:
 
 1. Identify the project phase and missing artifact.
 2. Read the smallest set of docs needed to act correctly.
-3. Make the change in the repo.
-4. Verify links, references, and any commands or tests affected.
-5. Leave the repo more legible than you found it.
+3. If local tooling is involved, confirm the exact path in `docs/WORKSTATION-TOOLCHAIN.md`.
+4. Make the change in the repo.
+5. Verify links, references, and any commands or tests affected.
+6. Leave the repo more legible than you found it.
